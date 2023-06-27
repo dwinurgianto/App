@@ -1,7 +1,7 @@
 // ignore_for_file: unused_import
 
 import "package:flutter/material.dart";
-import 'package:food_app/UI/login.dart';
+import 'package:food_app/UI/splash.dart';
 import 'package:food_app/UI/rootpage.dart';
 import 'package:food_app/UI/splash.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Mbah Nonik Recipe",
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
