@@ -23,81 +23,83 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                    ),
-                    width: size.width * .8,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.search,
-                          color:
-                              Color.fromARGB(255, 12, 52, 36).withOpacity(0.4),
-                        ),
-                        const Expanded(
-                          child: TextField(
-                            showCursor: false,
-                            decoration: InputDecoration(
-                              hintText: "Search",
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                      ),
+                      width: size.width * .8,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search,
+                            color: Color.fromARGB(255, 12, 52, 36)
+                                .withOpacity(0.4),
+                          ),
+                          const Expanded(
+                            child: TextField(
+                              showCursor: false,
+                              decoration: InputDecoration(
+                                hintText: "Search",
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 12, 52, 36).withOpacity(.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 12, 52, 36).withOpacity(.1),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.shopping_cart,
-                          color:
-                              Color.fromARGB(255, 12, 52, 36).withOpacity(.6),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                    Container(
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.shopping_cart,
+                            color:
+                                Color.fromARGB(255, 12, 52, 36).withOpacity(.6),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Best Seller",
-                    style: GoogleFonts.montserrat(
-                      textStyle: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(fontWeight: FontWeight.w300),
+              Container(
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Best Seller",
+                      style: GoogleFonts.montserrat(
+                        textStyle: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(fontWeight: FontWeight.w300),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 60,
-              width: size.width,
-            )
-          ],
+              SizedBox(
+                height: 60,
+                width: size.width,
+              )
+            ],
+          ),
         ),
       ),
     );

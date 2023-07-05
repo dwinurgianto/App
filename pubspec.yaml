@@ -35,6 +35,11 @@ dependencies:
   animated_bottom_navigation_bar: ^0.3.3
   curved_navigation_bar: ^1.0.3
   google_fonts: ^4.0.4
+  cloud_firestore: ^4.8.2
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
+  firebase_database: ^10.2.3
+  firebase_storage: ^11.2.4
   # flutter_native_splash: ^2.3.1
 
   # The following adds the Cupertino Icons font to your application.

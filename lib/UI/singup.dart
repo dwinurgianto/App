@@ -1,21 +1,23 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:food_app/UI/rootpage.dart";
-import "package:food_app/UI/singup.dart";
 import "package:google_fonts/google_fonts.dart";
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import "login.dart";
 
-  static String routeName = "LoginScreen";
+class SingUpScreen extends StatefulWidget {
+  const SingUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SingUpScreen> createState() => _SingUpState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SingUpState extends State<SingUpScreen> {
   TextEditingController _emailTextController = TextEditingController();
+  TextEditingController _usernameTextController = TextEditingController();
   TextEditingController _passTextController = TextEditingController();
+  TextEditingController _confirmpassTextController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,33 +27,24 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "images/logo.png",
-                width: 210,
-              ),
-              SizedBox(
-                height: 60,
-              ),
               Container(
                 width: size.width * .9,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Login to your account",
+                      "Sing Up",
                       style: GoogleFonts.montserrat(
                         color: Color.fromARGB(255, 12, 52, 36),
-                        textStyle: Theme.of(context)
-                            .textTheme
-                            .titleSmall!
-                            .copyWith(fontWeight: FontWeight.w400),
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
               ),
               SizedBox(
-                height: 8,
+                height: 40,
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -66,7 +59,36 @@ class _LoginScreenState extends State<LoginScreen> {
                         showCursor: false,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          hintText: "Email",
+                          labelText: "Email",
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 12, 52, 36).withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                width: size.width * .9,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _usernameTextController,
+                        showCursor: false,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          hintText: "User Name",
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                         ),
@@ -92,11 +114,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Expanded(
                       child: TextField(
                         controller: _passTextController,
-                        obscureText: true,
-                        keyboardType: TextInputType.visiblePassword,
                         showCursor: false,
+                        obscureText: true,
                         decoration: InputDecoration(
-                          hintText: "Password",
+                          hintText: "Create Password",
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                         ),
@@ -110,22 +131,51 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 8,
               ),
-              LoginSingUpButton(context, true, () {
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                width: size.width * .9,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _confirmpassTextController,
+                        showCursor: false,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: "Confirm Password",
+                          border: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 12, 52, 36).withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              LoginSingUpButton(context, false, () {
                 FirebaseAuth.instance
-                    .signInWithEmailAndPassword(
+                    .createUserWithEmailAndPassword(
                         email: _emailTextController.text,
                         password: _passTextController.text)
                     .then((value) {
-                  print("Login Successful");
+                  print("Create New Account");
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => RootPage()));
                 }).onError((error, stackTrace) {
                   print("Error ${error.toString()}");
                 });
               }),
-              SingUp(),
+              LogIn(),
               SizedBox(
                 height: 20,
               ),
@@ -182,12 +232,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Row SingUp() {
+  Row LogIn() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don’t Have any account?",
+          "Already Have any account?",
           style: GoogleFonts.montserrat(
             color: Color.fromARGB(255, 12, 52, 36).withOpacity(.8),
             fontSize: 14,
@@ -198,11 +248,11 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SingUpScreen(),
+                  builder: (context) => LoginScreen(),
                 ));
           },
           child: Text(
-            "Sing Up",
+            "Log In",
             style: GoogleFonts.montserrat(
               color: Color.fromARGB(255, 12, 52, 36),
               fontSize: 14,
@@ -213,37 +263,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
-}
-
-Container LoginSingUpButton(
-    BuildContext context, bool isLogin, Function onTap) {
-  Size size = MediaQuery.of(context).size;
-  return Container(
-    width: size.width * .9,
-    height: 78,
-    padding: EdgeInsets.fromLTRB(0, 10, 0, 20),
-    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-    child: ElevatedButton(
-      onPressed: () {
-        onTap();
-      },
-      child: Text(
-        isLogin ? "Log In" : "SingUp",
-        style: GoogleFonts.montserrat(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ),
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.pressed)) {
-              return Colors.white10;
-            }
-            return Color.fromARGB(255, 12, 52, 36);
-          }),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
-    ),
-  );
 }

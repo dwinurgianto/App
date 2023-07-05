@@ -49,7 +49,7 @@ class _RootPageState extends State<RootPage> {
               style: GoogleFonts.montserrat(
                 color: const Color.fromARGB(255, 12, 52, 36),
                 fontWeight: FontWeight.w500,
-                fontSize: 24,
+                fontSize: 12,
               ),
             ),
             Icon(

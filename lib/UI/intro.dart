@@ -83,7 +83,7 @@ class _introAppState extends State<introApp> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => RootPage()));
+                                    builder: (context) => LoginScreen()));
                           }
                         });
                       },
