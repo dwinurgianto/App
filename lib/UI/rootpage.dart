@@ -1,9 +1,11 @@
 import "package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+import "package:food_app/UI/Screen/cartpage.dart";
 import "package:food_app/UI/Screen/chatpage.dart";
 import "package:food_app/UI/Screen/favoritepage.dart";
 import "package:food_app/UI/Screen/homepage.dart";
+import "package:food_app/UI/Screen/notifikasipage.dart";
 import "package:food_app/UI/Screen/profilepage.dart";
 import "package:google_fonts/google_fonts.dart";
 
@@ -44,17 +46,44 @@ class _RootPageState extends State<RootPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              titleList[_bottomIndex],
-              style: GoogleFonts.montserrat(
-                color: const Color.fromARGB(255, 12, 52, 36),
-                fontWeight: FontWeight.w500,
-                fontSize: 12,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                titleList[_bottomIndex],
+                style: GoogleFonts.montserrat(
+                  color: const Color.fromARGB(255, 12, 52, 36),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
               ),
             ),
-            Icon(
-              Icons.notifications,
-              color: Color.fromARGB(255, 12, 52, 36).withOpacity(0.4),
+            Container(
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Color.fromARGB(255, 12, 52, 36).withOpacity(0.4),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.shopping_cart,
+                      color: Color.fromARGB(255, 12, 52, 36).withOpacity(0.4),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => CartPage()));
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
